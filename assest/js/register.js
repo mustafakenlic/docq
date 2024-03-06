@@ -184,12 +184,12 @@ submintBtn.addEventListener("click", () => {
 });
 
 const posToPatientPage = (postData) => {
-  const url = "registerpatient.html";
+  const url = "/registerpatient.html";
   postToPage(postData, url);
 };
 
 const posToDoctorPage = (postData) => {
-  const url = "registerdoctor.html";
+  const url = "/registerdoctor.html";
   postToPage(postData, url);
 };
 
