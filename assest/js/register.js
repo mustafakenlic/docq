@@ -220,40 +220,89 @@ submintBtn.addEventListener("click", () => {
 
 const showPatientPage = () => {
   const url = "registerpatient.html";
-  showePage(url);
+  //showePage(url);
 
-  definePatientDomObjests();
-  console.log(formBtnPatient);
-  formBtnPatient.addEventListener("click", () => {
-    // get all the data
+  fetch("/" + url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.text();
+    })
+    .then((htmlContent) => {
+      // convert HTML code a DOM object
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlContent, "text/html");
 
-    //post to the API
-    alert(
-      "Whitout api this form can not perfom, for now it will directy redirect to mail confirmation form"
-    );
+      // get content from elements from fetch
+      const containerContent = doc.getElementById("container").innerHTML;
 
-    //is every thing is ok, redirect to mail confirmation form
-    window.location.replace("registermailconfirm.html");
-  });
+      // show new content at the page
+      document.getElementById("container").innerHTML = containerContent;
+
+      // define new pages dom objects (patient)
+      definePatientDomObjests();
+
+      // add event listener to the new button.
+      formBtnPatient.addEventListener("click", () => {
+        // get all the data
+
+        //post to the API
+        alert(
+          "Whitout api this form can not perfom, for now it will directy redirect to mail confirmation form"
+        );
+
+        //is every thing is ok, redirect to mail confirmation form
+        window.location.replace("emailverification.html");
+      });
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
 };
 
 const showDoctorPage = () => {
   const url = "registerdoctor.html";
   showePage(url);
 
-  defineDcotorDomObjests();
+  
+  fetch("/" + url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.text();
+    })
+    .then((htmlContent) => {
+      // convert HTML code a DOM object
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlContent, "text/html");
 
-  window.formBtnDoctor.addEventListener("click", () => {
-    // get all the data
+      // get content from elements from fetch
+      const containerContent = doc.getElementById("container").innerHTML;
 
-    //post to the API
-    alert(
-      "Whitout api this form can not perfom, for now it will directy redirect to mail confirmation form"
-    );
+      // show new content at the page
+      document.getElementById("container").innerHTML = containerContent;
 
-    //is every thing is ok, redirect to mail confirmation form
-    window.location.replace("registermailconfirm.html");
-  });
+      // define new pages dom objects (patient)
+      defineDcotorDomObjests();
+
+      // add event listener to the new button.
+      formBtnDoctor.addEventListener("click", () => {
+        // get all the data
+
+        //post to the API
+        alert(
+          "Whitout api this form can not perfom, for now it will directy redirect to mail confirmation form"
+        );
+
+        //is every thing is ok, redirect to mail confirmation form
+        window.location.replace("emailverification.htmll");
+      });
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
 };
 
 const showePage = (url) => {
@@ -290,6 +339,8 @@ const definePatientDomObjests = () => {
   ageInput = document.getElementById("age");
   formBtnPatient = document.getElementById("frmbtnpatient");
 };
+
+//
 const defineDcotorDomObjests = () => {
   nameInput = document.getElementById("name");
   cityInput = document.getElementById("city");
