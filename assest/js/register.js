@@ -220,8 +220,8 @@ submintBtn.addEventListener("click", () => {
 
 const showPatientPage = () => {
   const url = "registerpatient.html";
-  //showePage(url);
-
+  
+  //show the page
   fetch("/" + url)
     .then((response) => {
       if (!response.ok) {
@@ -253,7 +253,7 @@ const showPatientPage = () => {
         );
 
         //is every thing is ok, redirect to mail confirmation form
-        window.location.replace("emailverification.html");
+        window.location.replace("emailverification.html?verify=sdf6sdf6sadf6");
       });
     })
     .catch((error) => {
@@ -263,9 +263,8 @@ const showPatientPage = () => {
 
 const showDoctorPage = () => {
   const url = "registerdoctor.html";
-  showePage(url);
 
-  
+  //show the page
   fetch("/" + url)
     .then((response) => {
       if (!response.ok) {
@@ -297,32 +296,8 @@ const showDoctorPage = () => {
         );
 
         //is every thing is ok, redirect to mail confirmation form
-        window.location.replace("emailverification.htmll");
+        window.location.replace("emailverification.html?verify=sdf6sdf6sadf6");
       });
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
-};
-
-const showePage = (url) => {
-  fetch("/" + url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.text();
-    })
-    .then((htmlContent) => {
-      // convert HTML code a DOM object
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(htmlContent, "text/html");
-
-      // get content from element has id of container
-      const containerContent = doc.getElementById("container").innerHTML;
-
-      // log the container content
-      document.getElementById("container").innerHTML = containerContent;
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
