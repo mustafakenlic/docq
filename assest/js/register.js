@@ -11,6 +11,25 @@ const userTypeError = document.getElementById("errusertype");
 
 const submintBtn = document.getElementById("frmbtn");
 
+// those are will be assigned when the second form loaded
+let nameInput = "";
+let cityInput = "";
+let phoneInput = "";
+//for patient
+let genderInput = "";
+let ageInput = "";
+let formBtnPatient = "";
+//for doctor
+let firmInput = "";
+let specializationsInput = "";
+let formBtnDoctor = "";
+
+//define global varibles
+let userMail = "";
+let userPassWord = "";
+let usrType = "";
+
+// check if password strong
 passInput.addEventListener("input", () => {
   const password = passInput.value;
   const passwordStrength = checkPasswordStrength(password);
@@ -129,6 +148,7 @@ const checkIsAlreadyMember = (mail) => {
   return result;
 };
 
+// proceses firt form
 submintBtn.addEventListener("click", () => {
   const mail = mailInput.value;
   const password = passInput.value;
@@ -165,58 +185,117 @@ submintBtn.addEventListener("click", () => {
 
   // if there is no error post data to second stage
   const userType = userTypeInput.value;
-  const postData = {
-    mail,
-    password,
-  };
+
   switch (userType) {
     case "patient":
-      posToPatientPage(postData);
+      //assing global values for next page
+      userMail = mail;
+      userPassWord = password;
+      usrType = "patient";
+
+      //show next page
+      showPatientPage();
       break;
     case "doctor":
-      posToDoctorPage(postData);
+      //assing global values for next page
+      userMail = mail;
+      userPassWord = password;
+      usrType = "doctor";
+
+      //show next page
+      showDoctorPage();
       break;
     default: // give an error
+      //clean gobal varibles
+      userMail = "";
+      userPassWord = "";
+      usrType = "";
+
+      //show error
       userTypeInput.setAttribute("aria-invalid", "true");
       passInputError.textContent = `Please select one`;
       break;
   }
 });
 
-const posToPatientPage = (postData) => {
-  const url = "/registerpatient.html";
-  postToPage(postData, url);
+const showPatientPage = () => {
+  const url = "registerpatient.html";
+  showePage(url);
+
+  definePatientDomObjests();
+  console.log(formBtnPatient);
+  formBtnPatient.addEventListener("click", () => {
+    // get all the data
+
+    //post to the API
+    alert(
+      "Whitout api this form can not perfom, for now it will directy redirect to mail confirmation form"
+    );
+
+    //is every thing is ok, redirect to mail confirmation form
+    window.location.replace("registermailconfirm.html");
+  });
 };
 
-const posToDoctorPage = (postData) => {
-  const url = "/registerdoctor.html";
-  postToPage(postData, url);
+const showDoctorPage = () => {
+  const url = "registerdoctor.html";
+  showePage(url);
+
+  defineDcotorDomObjests();
+
+  window.formBtnDoctor.addEventListener("click", () => {
+    // get all the data
+
+    //post to the API
+    alert(
+      "Whitout api this form can not perfom, for now it will directy redirect to mail confirmation form"
+    );
+
+    //is every thing is ok, redirect to mail confirmation form
+    window.location.replace("registermailconfirm.html");
+  });
 };
 
-const postToPage = (postData, url) => {
-  // Create a form element
-  var form = document.createElement("form");
+const showePage = (url) => {
+  fetch("/" + url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.text();
+    })
+    .then((htmlContent) => {
+      // convert HTML code a DOM object
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlContent, "text/html");
 
-  // Set the form attributes
-  form.method = "post";
-  form.action = url;
+      // get content from element has id of container
+      const containerContent = doc.getElementById("container").innerHTML;
 
-  // Add hidden input fields for each key-value pair in postData
-  for (var key in postData) {
-    if (postData.hasOwnProperty(key)) {
-      var input = document.createElement("input");
-      input.type = "hidden";
-      input.name = key;
-      input.value = postData[key];
-      form.appendChild(input);
-    }
-  }
-  // Append the form to the document body
-  document.body.appendChild(form);
+      // log the container content
+      document.getElementById("container").innerHTML = containerContent;
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation:", error);
+    });
+};
 
-  // Submit the form
-  form.submit();
+//second form functions
+const definePatientDomObjests = () => {
+  nameInput = document.getElementById("name");
+  cityInput = document.getElementById("city");
+  phoneInput = document.getElementById("phone");
 
-  // remove the form from the document after submission
-  document.body.removeChild(form);
+  genderInput = document.getElementById("gender");
+  ageInput = document.getElementById("age");
+  formBtnPatient = document.getElementById("frmbtnpatient");
+};
+const defineDcotorDomObjests = () => {
+  nameInput = document.getElementById("name");
+  cityInput = document.getElementById("city");
+  phoneInput = document.getElementById("phone");
+
+  firmInput = document.getElementById("firm");
+  specializationsInput = document.getElementById("specializations");
+  formBtnDoctor = document.getElementById("frmbtndcotor");
 };

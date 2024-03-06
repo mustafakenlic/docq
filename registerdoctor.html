@@ -21,28 +21,42 @@
   </head>
   <body>
     <main id="container">
-      <h1>Tell us about your self D</h1>
+      <h1>Tell us about your self</h1>
       <div class="formwrp">
-        <label for="mail">Mail</label>
-        <input type="mail" id="mail" />
-        <span id="errmail" class="err"></span>
+        <label for="name">Name</label>
+        <input type="text" id="name" />
+        <span id="errname" class="err"></span>
       </div>
+      
       <div class="formwrp">
-        <label for="password">Password</label>
-        <input type="password" id="password"/>
-        <span id="pwdstrength"></span>
-        <span id="errpassword" class="err"></span>
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" />
+        <span id="errname" class="err"></span>
       </div>
+
       <div class="formwrp">
-        <label for="usertype">Register As</label>
-        <select id="usertype">
-          <option value="patient">Patient</option>
-          <option value="doctor">Doctor</option>
-        </select>
-        <span id="errusertype" class="err"></span>
+        <label for="specializations">Specializations</label>
+        <input type="text" id="specializations" />
+        <span id="errspecializations" class="err"></span>
       </div>
+      
+      <div class="formwrp">
+        <label for="firm">Firm</label>
+        <input type="text" id="firm" />
+        <span id="errfirm" class="err"></span>
+      </div>
+      
+      <div class="formwrp">
+        <label for="city">City</label>
+        <input type="text" id="city" />
+        <span id="errcity" class="err"></span>
+      </div>
+      
+
+
+
       <div id="frmbtnwrp">
-        <button id="frmbtn">Finish</button>
+        <button id="frmbtndcotor" class="frmbtn">Finish</button>
       </div>
     </main>
 
