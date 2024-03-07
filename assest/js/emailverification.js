@@ -53,7 +53,7 @@ const getVerificationStatus = (verificationCode) => {
   let response = {
     iscodevalid: true,
     codedmail: "jo****04@gmail.com",
-    secremain: 180,
+    secremain: 300,
   };
 
   //make the API request
