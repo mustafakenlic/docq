@@ -87,7 +87,6 @@ const setVerificationStrings = (codedmail, secremain) => {
 
 let countdownInterval;
 const countdown = () => {
-
   // reset the countdownInterval when resend is clicked
   if (countdownInterval) {
     clearInterval(countdownInterval);
@@ -131,10 +130,8 @@ const moveToNext = (input, nextInputId) => {
 // this funtion going to make API request and check is code right
 submitBtn.addEventListener("click", () => {
   clearInterval(countdownInterval);
-  console.log("clicked")
-
+  console.log("clicked");
 });
-
 
 //change the mail
 /*
@@ -142,13 +139,13 @@ submitBtn.addEventListener("click", () => {
  send to API and get news verification code
  redirect to this page
  */
-const changeMail = () =>{
-const newmail = userInput = prompt("Please write you email");
+const changeMail = () => {
+  const newmail = (userInput = prompt("Please write you email"));
 
-//make aPI request and get new verification code
-const newCode = "65a4dsf65asdf";
-window.location.href = "emailverification.html?verify=" + newCode;
-}
+  //make aPI request and get new verification code
+  const newCode = "65a4dsf65asdf";
+  window.location.href = "emailverification.html?verify=" + newCode;
+};
 
 //resend mail
 /**
@@ -156,10 +153,10 @@ window.location.href = "emailverification.html?verify=" + newCode;
  * going to reset page count down etc.
  */
 const resend = () => {
-  //make APı request if it is sucsess...
+  //make API request if it is sucsess...
   alert("A new email is send");
   mainFunction();
-}
+};
 
 // call the main func.
 mainFunction();
