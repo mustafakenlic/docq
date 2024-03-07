@@ -32,6 +32,7 @@
           max="9"
           onkeypress="return event.charCode >= 48 && event.charCode <= 57"
           id="digit1"
+          oninput="moveToNext(this, 'digit2')"
         />
         <input
           class="digit"
@@ -41,6 +42,7 @@
           max="9"
           onkeypress="return event.charCode >= 48 && event.charCode <= 57"
           id="digit2"
+          oninput="moveToNext(this, 'digit3')"
         />
         <input
           class="digit"
@@ -50,6 +52,7 @@
           max="9"
           onkeypress="return event.charCode >= 48 && event.charCode <= 57"
           id="digit3"
+          oninput="moveToNext(this, 'digit4')"
         />
         <input
           class="digit"
@@ -59,6 +62,7 @@
           max="9"
           onkeypress="return event.charCode >= 48 && event.charCode <= 57"
           id="digit4"
+          oninput="moveToNext(this, 'digit5')"
         />
         <input
           class="digit"
@@ -68,6 +72,7 @@
           max="9"
           onkeypress="return event.charCode >= 48 && event.charCode <= 57"
           id="digit5"
+          oninput="moveToNext(this, 'digit6')"
         />
         <input
           class="digit"
@@ -77,6 +82,7 @@
           max="9"
           onkeypress="return event.charCode >= 48 && event.charCode <= 57"
           id="digit6"
+          oninput="moveToNext(this, 'frmbtn')"
         />
       </div>
       <div>
@@ -86,7 +92,7 @@
         <button id="frmbtn" class="frmbtn">Verify Account</button>
       </div>
       <div>
-        <p>Didn't receive the code, <span id="resendemail" class="btn"> Resend </span></p>
+        <p>Didn't receive the code, <span id="resendemail" class="btn" onclick="resend();"> Resend </span></p>
       </div>
     </main>
 
